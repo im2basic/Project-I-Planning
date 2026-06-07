@@ -1,6 +1,6 @@
 # Project I — Master Design Plan
 
-> **Status:** Pre-production planning, June 2026
+> **Status:** Pre-production planning → **vertical slice in code** (all core systems implemented & unit-tested; see § 4A), June 2026
 > **Engine:** Unity (target Windows PC; macOS post-launch)
 > **Genre:** Idle Gacha Turn-Based Hero Collector RPG
 > **Window paradigm:** Desktop / Taskbar (TBH-inspired)
@@ -120,6 +120,44 @@ The closest reference is TBH: Task Bar Hero (desktop format) crossed with Epic S
 - [`CHANGELOG-from-source-PDF.md`](./CHANGELOG-from-source-PDF.md) — All 50+ changes vs the source PDF
 - [`BACKLOG.md`](./BACKLOG.md) — 29 deferred features parked for future consideration
 - `heroes/` — Per-hero detailed sheets (pending audit answers — see § 9)
+
+## 4A. Implementation Status (code build)
+
+> Live build state of the Unity project. Full per-GDD detail in [`IMPLEMENTATION-STATUS.md`](./IMPLEMENTATION-STATUS.md).
+> **191 automated tests passing** (headless `dotnet test`), Unity 6 editor compiles clean, all scenes screenshot-verified.
+> Legend: ✅ code-complete & tested · 🟡 partial (code done, needs assets/services) · ⬜ not started.
+
+| GDD | System | Build |
+|-----|--------|-------|
+| 01 | Combat (sim, damage, status, counters, enrage, passives, boss phases, tower modifiers) | ✅ |
+| 02 | Elements & Classes | ✅ |
+| 03 | Stats & Progression | ✅ |
+| 04 | Equipment (resolver, loot, enhance, salvage; **all 6 set bonuses incl. 4pc specials in combat**) | ✅ |
+| 05 | Gacha & Currencies | ✅ |
+| 06 | Idle & Shrine | ✅ |
+| 07 | Eggs & Fusion | ✅ |
+| 08 | Inventory & Storage | ✅ |
+| 09 | Campaign (`StageRunner`) | ✅ engine · 🟡 12-chapter stage content authoring pending |
+| 10 | Tower of Trials | ✅ |
+| 11 | World Map / Expedition | ✅ |
+| 12 | Daily/Weekly/Trials/Boss Rush/Achievements + **Mail/Inbox + Codex/Bestiary** | ✅ |
+| 13 | Battle Pass | ✅ |
+| 14 | Monetization (packs, Monthly Card, Beginner Pack) | 🟡 IAP receipt validation needs backend |
+| 15 | Desktop Window UX (Compact/Expanded) | 🟡 full tray + 9 settings sub-tabs pending |
+| 16 | **Tutorial / Onboarding** (9-stage, guaranteed starter team) | ✅ |
+| 17 | Save System (JSON + checksum/XOR + disk) | ✅ |
+| 18 | Audio | ⬜ needs assets |
+| 19 | Localization | ⬜ code-able (string tables) |
+| 20 | UI / Menus / Tabs (13 placeholder scenes) | 🟡 final UI Toolkit pending |
+| 21 | Live-ops / Telemetry / Security (save anti-tamper done) | 🟡 telemetry code-able; config/IAP need backend |
+| 22 | Boss Design (phase/revive **engine** done) | 🟡 per-boss kits — placeholder, user-owned |
+| 23 | Art Direction | ⬜ needs assets |
+| 24 | Day-1 Content (**all 15 heroes carry real per-sheet stats/skills/passives**) | 🟡 final tuning + art |
+| 25 | Enemy AI (5-tier) | ✅ |
+
+**Presentation:** persistent save, Compact/Expanded TBH window, `MainHub` + 13 navigable scenes (Combat, Gacha, Roster, Campaign, Tower, Expedition, Shop, Battle Pass, Hatchery, Settings, Hero/Equip, Mail/Codex, Tutorial), all placeholder visuals.
+
+**Remaining work is asset- or backend-gated** (final art/animation, audio, UI-Toolkit polish, telemetry backend, IAP receipt validation, store/cert) **plus a live balance tuning pass.** CI runs the headless suite on every push (`feat/ci` pending a PAT `workflow`-scope update to push).
 
 ## 5. Roster Summary
 
@@ -251,7 +289,8 @@ All source-PDF inconsistencies have been resolved with user input. See `CHANGELO
 
 ## 9. Hero Sheets
 
-Per-hero detailed sheets live in `design/heroes/*.md`. All 15 5★ sheets are authored.
+Per-hero detailed sheets live in `design/heroes/*.md`. All 15 5★ sheets are authored **and their stat
+grades / skills / passives are now wired into the in-game `HeroDefinitionSO` assets** (see § 4A, GDD 24).
 
 Recommended sheet template (per hero):
 - Header: name, element, class, role, weapon, rarity, banner pool
