@@ -1,0 +1,186 @@
+/* Print/PDF stylesheet for Project I master plan */
+@page {
+  size: Letter;
+  margin: 0.75in 0.6in;
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    color: #777;
+  }
+  @top-right {
+    content: string(chapter);
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    color: #777;
+  }
+}
+
+html {
+  font-family: -apple-system, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #222;
+}
+
+h1 {
+  string-set: chapter content();
+  page-break-before: always;
+  font-size: 22pt;
+  border-bottom: 3px solid #2a4d7a;
+  color: #1f3656;
+  margin-top: 0;
+  padding-bottom: 6pt;
+}
+
+h1:first-of-type {
+  page-break-before: avoid;
+}
+
+h2 {
+  font-size: 16pt;
+  color: #2a4d7a;
+  border-bottom: 1px solid #c5d3e6;
+  padding-bottom: 4pt;
+  margin-top: 24pt;
+}
+
+h3 {
+  font-size: 13pt;
+  color: #34568b;
+  margin-top: 14pt;
+}
+
+h4 {
+  font-size: 11pt;
+  color: #34568b;
+}
+
+p, li {
+  font-size: 10.5pt;
+}
+
+ul, ol {
+  padding-left: 22pt;
+}
+
+li {
+  margin-bottom: 3pt;
+}
+
+code {
+  font-family: "Menlo", "SF Mono", "Consolas", monospace;
+  background: #f4f5f7;
+  border-radius: 3pt;
+  padding: 1pt 4pt;
+  font-size: 9.5pt;
+  color: #333;
+}
+
+pre {
+  background: #1e2434;
+  color: #e8eaf0;
+  border-radius: 5pt;
+  padding: 10pt 12pt;
+  font-size: 9pt;
+  line-height: 1.4;
+  overflow-x: auto;
+  page-break-inside: avoid;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 9pt;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8pt 0;
+  page-break-inside: avoid;
+  font-size: 9.5pt;
+}
+
+th {
+  background: #2a4d7a;
+  color: white;
+  text-align: left;
+  padding: 5pt 7pt;
+  font-weight: 600;
+  font-size: 9.5pt;
+}
+
+td {
+  border-bottom: 1px solid #e0e4ec;
+  padding: 5pt 7pt;
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: #f7f9fc;
+}
+
+blockquote {
+  border-left: 4px solid #2a4d7a;
+  padding: 6pt 12pt;
+  background: #f4f7fc;
+  color: #444;
+  margin: 10pt 0;
+  font-style: italic;
+}
+
+/* CRITICAL: highlight new/changed content per CHANGELOG */
+mark {
+  background: #fff36b;
+  background: linear-gradient(180deg, #fff8a8 0%, #ffe44d 100%);
+  color: #1a1a1a;
+  padding: 1pt 3pt;
+  border-radius: 2pt;
+  border-left: 3pt solid #f5b800;
+  padding-left: 5pt;
+}
+
+mark p:first-child {
+  margin-top: 4pt;
+}
+
+mark p:last-child {
+  margin-bottom: 4pt;
+}
+
+a {
+  color: #2a4d7a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #c5d3e6;
+  margin: 18pt 0;
+}
+
+/* Cover styling */
+.cover {
+  page-break-after: always;
+  text-align: center;
+  padding-top: 2in;
+}
+
+.cover h1 {
+  border: none;
+  font-size: 32pt;
+  page-break-before: avoid;
+  margin-bottom: 0.5in;
+}
+
+/* Legend box */
+.legend {
+  background: #f4f7fc;
+  border: 1px solid #c5d3e6;
+  border-radius: 5pt;
+  padding: 10pt 14pt;
+  margin: 18pt 0;
+}
