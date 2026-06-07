@@ -115,12 +115,17 @@ The PDF will be regenerated at `design/Project-I-Master-Plan.pdf` with yellow hi
 
 ## 📋 Status
 
+**Design**
 - ✅ Design phase complete (25 GDDs + 15 hero sheets)
 - ✅ Day-1 launch content locked (`design/gdd/24-day-1-launch-content.md`)
-- ⏳ Boss designs (12 chapter bosses) — placeholders only
-- ⏳ Art direction (style guide / art bible) — placeholder only
+- ⏳ Boss designs (12 chapter bosses) — placeholders (engine mechanics implemented)
+- ⏳ Art direction (style guide / art bible) — placeholder
 - ⏳ 4★ hero designs (15) — user is producing separately
-- ⏳ Unity project scaffolding — see `design/unity-setup-guide.md`
+
+**Implementation** (Unity 6 project — see [`design/IMPLEMENTATION-STATUS.md`](./design/IMPLEMENTATION-STATUS.md))
+- ✅ Core game-logic engine: combat (+AI, modifiers, passives, boss mechanics), gacha/economy, equipment/loot, campaign/tower/expedition/boss-rush, idle, live-content, battle pass, eggs/fusion, monetization, save — **160 automated tests passing**
+- ✅ Navigable game shell + 11 placeholder scenes (persistent save, Compact/Expanded window modes)
+- ⏳ Per-screen interactivity, final art/audio, tutorial, telemetry/server, balance pass
 
 ---
 

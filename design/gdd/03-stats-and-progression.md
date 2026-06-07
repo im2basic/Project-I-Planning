@@ -43,7 +43,9 @@ This decision is pending user confirmation (F-05, F-06, F-07).</mark>
 ### 3.2 Hero Level System
 
 - **Max Level:** 60
-- **Stats per level:** small additive growth to HP / ATK / DEF / Speed
+- **Stats per level:** small additive growth to **HP / ATK / DEF only**.
+<!-- RESOLVED 2026-06-06 (design call by dev): Speed/CR/CD/ACC do NOT grow with level. Only HP/ATK/DEF scale (per §4 formulas). Rationale: matches the genre standard (Epic Seven), keeps base Speed a fixed, gear/buff-driven value so the action-gauge turn system stays strategic, and prevents Speed inflation that would let high-level teams outrun all content trivially. Speed/CritRate/CritDmg/Accuracy come from base stat + gear + buffs only. Implemented in ProjectI.Core ProgressionMath. Re-tunable after playtesting. -->
+- **Speed / CritRate / CritDmg / Accuracy:** fixed at the hero's base value (modified only by gear and in-combat buffs), NOT by level.
 - **No skill unlocks tied to level** (skill unlock is part of Awakening — see 3.4)
 
 **Gold + EXP cost curve:**
