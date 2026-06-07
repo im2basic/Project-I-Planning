@@ -54,9 +54,18 @@ _Last updated: 2026-06-07_
 
 ## Presentation layer (Unity scenes)
 
-✅ Navigable shell: `SaveService` (persistent), `WindowModeController`, `MainHub` + **10 screen scenes**
-(Combat, Gacha, Roster, Campaign, Tower, Expedition, Shop, Battle Pass, Hatchery, Settings) — all placeholder
-visuals, screenshot-verified. Per-screen interactivity (clicking to mutate the live save) is the next step.
+✅ Navigable shell: `SaveService` (persistent save), `WindowModeController` (Compact/Expanded TBH window),
+`MainHub` + **11 screen scenes**, placeholder visuals, all screenshot-verified.
+
+✅ **Playable** — every gameplay screen mutates the persistent save:
+- **Gacha** PULL x10 (tickets→heroes→pity) · **Roster** +5 LV (gold/EXP→levels) · **Campaign** FIGHT
+  (real `StageRunner` battle → chapter progress) · **Tower** CLIMB (battle → floor + coin) ·
+  **Hatchery** HATCH/FUSE (fodder ladder) · **Shop** buy/convert/tickets · **Expedition** dispatch/claim.
+- Combat scene plays back a battle frame-by-frame. Settings shows live accessibility options.
+
+⬜ Remaining (needs assets / services beyond code): final art & animation, audio, tutorial flow,
+UI-Toolkit polish, telemetry + backend + Steam IAP receipt validation + store/cert, and the balance
+pass from the per-hero sheets.
 
 ## Architecture
 
