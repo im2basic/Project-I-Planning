@@ -124,7 +124,7 @@ The closest reference is TBH: Task Bar Hero (desktop format) crossed with Epic S
 ## 4A. Implementation Status (code build)
 
 > Live build state of the Unity project. Full per-GDD detail in [`IMPLEMENTATION-STATUS.md`](./IMPLEMENTATION-STATUS.md).
-> **212 automated tests passing** (headless `dotnet test`), Unity 6 editor compiles clean, all scenes screenshot-verified.
+> **236 automated tests passing** (headless `dotnet test`), Unity 6 editor compiles clean, all scenes screenshot-verified.
 > Legend: ✅ code-complete & tested · 🟡 partial (code done, needs assets/services) · ⬜ not started.
 
 | GDD | System | Build |
@@ -137,13 +137,13 @@ The closest reference is TBH: Task Bar Hero (desktop format) crossed with Epic S
 | 06 | Idle & Shrine | ✅ |
 | 07 | Eggs & Fusion | ✅ |
 | 08 | Inventory & Storage | ✅ |
-| 09 | Campaign (`StageRunner`) | ✅ engine · 🟡 12-chapter stage content authoring pending |
+| 09 | Campaign (`StageRunner` + `StageLibrary` 120 stages × 4 diff + bosses + `CampaignRewards` loot) | ✅ |
 | 10 | Tower of Trials | ✅ |
 | 11 | World Map / Expedition | ✅ |
-| 12 | Daily/Weekly/Trials/Boss Rush/Achievements + **Mail/Inbox + Codex/Bestiary** | ✅ |
+| 12 | Daily/Weekly/Trials/Boss Rush/Achievements + Mail/Inbox + Codex + **mission & achievement catalogs** | ✅ |
 | 13 | Battle Pass | ✅ |
 | 14 | Monetization (packs, Monthly Card, Beginner Pack) | 🟡 IAP receipt validation needs backend |
-| 15 | Desktop Window UX (Compact/Expanded) | 🟡 full tray + 9 settings sub-tabs pending |
+| 15 | Desktop Window UX (Compact/Expanded + **`GameSettings`: 9 sub-tabs, 40+ options**) | 🟡 tray + settings UI screens pending |
 | 16 | **Tutorial / Onboarding** (9-stage, guaranteed starter team) | ✅ |
 | 17 | Save System (JSON + checksum/XOR + disk) | ✅ |
 | 18 | Audio | ⬜ needs assets |
@@ -157,7 +157,7 @@ The closest reference is TBH: Task Bar Hero (desktop format) crossed with Epic S
 
 **Presentation:** persistent save, Compact/Expanded TBH window, `MainHub` + 13 navigable scenes (Combat, Gacha, Roster, Campaign, Tower, Expedition, Shop, Battle Pass, Hatchery, Settings, Hero/Equip, Mail/Codex, Tutorial), all placeholder visuals.
 
-**Remaining code-able (no assets):** campaign stage content (12 ch × 10 × 4 + loot tables), ~150 achievement definitions, daily/weekly mission set, 9 settings sub-tabs. **Remaining asset/backend-gated:** final art/animation, audio, UI-Toolkit polish, telemetry/config backend, IAP receipt validation, store/cert, plus a live balance tuning pass. CI runs the headless suite on every push (`feat/ci` pending a PAT `workflow`-scope update to push).
+**All discrete code-able-without-assets logic & content is now done.** Remaining is asset/backend/UI-presentation-gated: final art/animation, audio, UI-Toolkit screens (data models exist), telemetry/config backend, IAP receipt validation, store/cert, the ~150-achievement / final-boss-kit design expansion (user-owned), plus a live balance tuning pass. CI runs the headless suite on every push (`feat/ci` pending a PAT `workflow`-scope update to push).
 
 ## 5. Roster Summary
 

@@ -3,7 +3,7 @@
 > Maps each GDD to its current build state in the Unity project. Updated as systems ship.
 > Legend: ✅ implemented & tested · 🟡 partial · ⬜ not started.
 > Verification: pure-C# logic in `ProjectI.Core` is unit-tested headlessly (`dotnet test`) **and**
-> confirmed compiling/running in the Unity 6 editor. **212 automated tests passing.**
+> confirmed compiling/running in the Unity 6 editor. **236 automated tests passing.**
 > CI: GitHub Actions runs the headless suite on every push (`.github/workflows/tests.yml`).
 
 _Last updated: 2026-06-07_
@@ -25,10 +25,10 @@ _Last updated: 2026-06-07_
 
 | GDD | System | Status | Notes |
 |-----|--------|--------|-------|
-| 09 | Campaign Structure | ✅ | `StageRunner` (multi-wave, HP/cooldown carry-over, 3-star, difficulty gates) |
+| 09 | Campaign Structure | ✅ | `StageRunner` (multi-wave, HP/cooldown carry-over, 3-star, difficulty gates) + **`StageLibrary` 120 stages × 4 diff with bosses & ramped enemies + `CampaignRewards` loot tables** |
 | 10 | Tower of Trials | ✅ | Hero-lock state machine, coin shop + limits, monthly reset; floor modifiers wired into combat |
 | 11 | World Map / Expedition | ✅ | Dispatch slots, crew bonuses, validation, quick-send, 6h refresh |
-| 12 | Daily/Weekly/Trials/Boss Rush/Achievements | ✅ | `MissionTracker`, login bonus, hero-trial rotation, achievements, `BossRushRunner`. **Mail/Inbox + Codex/Bestiary now done** |
+| 12 | Daily/Weekly/Trials/Boss Rush/Achievements | ✅ | `MissionTracker`, login bonus, hero-trial rotation, achievements, `BossRushRunner`, Mail/Inbox + Codex/Bestiary + **`MissionCatalog` (8 daily/6 weekly) & `AchievementCatalog` (49 across 8 categories)** |
 | 25 | Enemy AI | ✅ | 5-tier AI (Mindless→Optimal) + boss/difficulty overrides, deviation |
 | 22 | Boss Design | 🟡 | Phase-shift + revive **engine** done; `BossDefinitionData`/`BossFactory` + **12 filler chapter bosses** (`BossLibrary`, pattern-library kits) — final per-boss designs user-owned |
 
@@ -44,7 +44,7 @@ _Last updated: 2026-06-07_
 
 | GDD | System | Status | Notes |
 |-----|--------|--------|-------|
-| 15 | Desktop Window UX | 🟡 | `WindowModeController` Compact (always-on-top widget) / Expanded; full tray + 9 settings sub-tabs ⬜ |
+| 15 | Desktop Window UX | 🟡 | `WindowModeController` Compact/Expanded + **`GameSettings` model — all 9 sub-tabs / 40+ options, hotkeys, clamping**; tray + settings UI screens ⬜ |
 | 16 | Tutorial / Onboarding | ✅ | `TutorialFlow`: 9-stage sequence, no-skip-before-stage-3, guaranteed Stage-5 starter team (Lyria 5★ + Sylphie/Valdrik 3★), day-1 gems, dismissible hints, Crystal-preserving reset; `TutorialSandbox` scene |
 | 18 | Audio | ⬜ | Not started |
 | 19 | Localization | ✅ | `LocalizationService`: key→locale→English→key fallback, `{var}` substitution, ICU-lite plurals, RTL flag, MissingKeys QA; 10 locales wired (EN shipping) |
@@ -64,19 +64,21 @@ _Last updated: 2026-06-07_
   **Hatchery** HATCH/FUSE (fodder ladder) · **Shop** buy/convert/tickets · **Expedition** dispatch/claim.
 - Combat scene plays back a battle frame-by-frame. Settings shows live accessibility options.
 
-⬜ Remaining **code-able** (no assets, content/UI authoring): campaign stage content (12 ch × 10 stages
-× 4 difficulties as data + loot tables), ~150 achievement definitions, daily/weekly mission set, and the
-40+ settings options across 9 sub-tabs.
+✅ All discrete **code-able-without-assets** logic/content is now done: campaign stage content (120 stages
+× 4 difficulties + bosses + loot tables), daily/weekly mission catalog, achievement catalog (49), and the
+full settings model (9 sub-tabs / 40+ options).
 
-⬜ Remaining **asset/backend-gated**: final art & animation, audio, UI-Toolkit polish, telemetry/config
-backend + Steam IAP receipt validation + store/cert, and a live balance tuning pass (per-hero base values
-are wired from the sheets; numbers still want playtesting).
+⬜ Remaining is **asset/backend/UI-presentation-gated**: final art & animation, audio, UI-Toolkit screens
+(the settings/mail/codex/etc. data models exist; they need real UI), telemetry/config backend + Steam IAP
+receipt validation + store/cert, the ~150-achievement / final-boss-kit design expansion (user-owned), and a
+live balance tuning pass (per-hero base values are wired from the sheets; numbers still want playtesting).
 
 ## Architecture
 
 Pure-C# `ProjectI.Core` (no engine deps) + `ProjectI.Data` (ScriptableObjects) + `ProjectI.Gameplay`
 (MonoBehaviours/scenes) + `ProjectI.Editor` (tools). Governed by ADR-0001..0003. All gameplay values data-driven.
-Source repo: separate from this planning repo; ~40 feature branches on GitHub. New since the last update:
-Localization (`ProjectI.Localization`), Telemetry (`ProjectI.Telemetry`), Boss content (`ProjectI.Bosses`).
-**Note:** the `feat/ci` branch (GitHub Actions workflow) needs a PAT with `workflow` scope to push —
-pending a token-scope update.
+Source repo: separate from this planning repo; ~43 feature branches on GitHub. New since the last update:
+Localization (`ProjectI.Localization`), Telemetry (`ProjectI.Telemetry`), Boss content (`ProjectI.Bosses`),
+campaign content (`StageLibrary`/`EnemyFactory`/`CampaignRewards`), mission + achievement catalogs, and the
+`GameSettings` model. **Note:** the `feat/ci` branch (GitHub Actions workflow) needs a PAT with `workflow`
+scope to push — pending a token-scope update.
